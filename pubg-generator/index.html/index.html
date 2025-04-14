@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUBG UC Generator & Rewards</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Google Platform Library -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<body>
+  <div class="top-buttons">
+    <button onclick="switchSection('generator')">PUBG UC Generator</button>
+    <button onclick="switchSection('rewards')">PUBG Rewards</button>
+  </div>
+
+  <!-- UC Generator Section -->
+  <div class="section" id="generatorSection">
+    <h1>PUBG UC Generator</h1>
+    <input type="number" id="gameId" placeholder="Game ID" />
+    <input type="number" id="ucAmount" placeholder="UC Amount" />
+    <button onclick="generateUC()">Generate UC</button>
+    <div id="output" class="output"></div>
+
+    <div class="social-login">
+      <p>Login with:</p>
+      <button class="fb" onclick="openModal('facebook')">Facebook</button>
+      <button class="twitter" onclick="openModal('twitter')">Twitter</button>
+      <button class="google" onclick="openGoogleModal()">Google</button>
+    </div>
+  </div>
+
+  <!-- Rewards Section -->
+  <div class="section" id="rewardsSection" style="display:none;">
+    <h1>Select Your PUBG Reward</h1>
+    <div class="rewards-grid" id="rewardsGrid"></div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="loginTitle">Login</h2>
+      <input type="text" id="loginUser" placeholder="Username or Email" />
+      <input type="password" id="loginPass" placeholder="Password" />
+      <button onclick="submitLogin()">Continue</button>
+    </div>
+  </div>
+
+  <!-- Google Login Modal -->
+  <div id="googleModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeGoogleModal()">&times;</span>
+      <h2>Google Login</h2>
+      <input type="email" id="googleEmail" placeholder="Enter your Google Email" />
+      <input type="password" id="googlePassword" placeholder="Enter your Google Password" />
+      <button onclick="submitGoogleLogin()">Login with Google</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
